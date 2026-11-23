@@ -309,10 +309,11 @@ const mo=document.createElement('div');mo.id='more';mo.hidden=true;[['ntxt','＋
 for(const[id,label]of[['fsel','المجلد'],['ncol','لون الملاحظة']]){const field=document.createElement('label');field.className='menu-field';field.textContent=label;field.appendChild($('#'+id));mo.appendChild(field)}
 const installBtn=document.createElement('button');installBtn.className='b';installBtn.type='button';installBtn.textContent='📲 تثبيت التطبيق';mo.appendChild(installBtn);
 let installPrompt=null;
+const isNativeApp=!!window.Capacitor?.isNativePlatform();
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e});
 installBtn.onclick=async()=>{if(installPrompt){await installPrompt.prompt();installPrompt=null;return}alert('لإضافة التطبيق إلى جهازك: افتح قائمة المتصفح ثم اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».')};
 window.addEventListener('appinstalled',()=>{installPrompt=null;installBtn.hidden=true});
-if(window.matchMedia('(display-mode: standalone)').matches)installBtn.hidden=true;
+if(isNativeApp||window.matchMedia('(display-mode: standalone)').matches)installBtn.hidden=true;
 const mb=document.createElement('button');mb.className='b';mb.id='mbtn';mb.textContent='⋮';$('#top').appendChild(mb);$('#top').insertBefore($('#nnew'),$('#bgb'));$('#nnew').textContent='+';$('#nnew').title='ملاحظة جديدة';$('#tside').textContent='←';$('#tside').title='الملاحظات';$('#main').appendChild(mo);
 mb.onclick=()=>{mo.hidden=!mo.hidden;$('#pop').hidden=$('#pshp').hidden=true};
 $('#cbtn').onclick=()=>{$('#pop').hidden=!$('#pop').hidden;$('#pshp').hidden=mo.hidden=true};
@@ -426,7 +427,7 @@ function prs(){const e=$('#prs');e.innerHTML='';S.presets.forEach((p,i)=>{const 
 prs();
 load();mark();po();$('#sz').value=S.size;$('#smooth').value=S.smooth;$('#title').value=N().title;size();fsel();mode();ui();list();
 $('#side').classList.add('hide');
-if('serviceWorker'in navigator&&window.isSecureContext)navigator.serviceWorker.register('./sw.js').catch(e=>console.error('Service worker registration failed',e));
+if(!isNativeApp&&'serviceWorker'in navigator&&window.isSecureContext)navigator.serviceWorker.register('./sw.js').catch(e=>console.error('Service worker registration failed',e));
 })();
 </script>
 </body>

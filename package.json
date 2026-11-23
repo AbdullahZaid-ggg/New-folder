@@ -1,0 +1,19 @@
+{
+  "name": "myl-notes-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android app wrapper for ملاحظاتي",
+  "scripts": {
+    "copy:web": "node scripts/copy-web.js",
+    "android:sync": "npm run copy:web && cap sync android",
+    "android:open": "npm run android:sync && cap open android",
+    "android:apk": "npm run android:sync && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/core": "^8.6.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.6.2"
+  }
+}
