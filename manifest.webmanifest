@@ -1,0 +1,21 @@
+{
+  "name": "ملاحظاتي",
+  "short_name": "ملاحظاتي",
+  "description": "دفتر ملاحظات للرسم والكتابة بالقلم",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
